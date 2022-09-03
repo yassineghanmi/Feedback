@@ -8,7 +8,7 @@ function FeedbackStats() {
     }, 0) / feedback.length;
   average = average.toFixed(1);
   let Stringaverage = average.toString();
-  if (average % 2 == 0) {
+  if (average % 2 === 0) {
     average = Stringaverage.split(".")[0];
   }
   return (
