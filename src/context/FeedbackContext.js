@@ -1,14 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { createContext, useState } from "react";
 import { FeedbackData } from "../data/FeedbackData";
 const FeedbackContext = createContext();
 
 export const FeedbackProvider = ({ children }) => {
-  const [feedback, setFeedback] = useState(FeedbackData);
+  const [feedback, setFeedback] = useState([]);
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
     edit: false,
   });
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const fetchData = async () => {
+    const response = await axios.get(`http://localhost:5000/feedback`);
+    setFeedback(response.data);
+  };
   const feedbackDelete = (id) => {
     setFeedback(feedback.filter((feed) => feed.id !== id));
   };
